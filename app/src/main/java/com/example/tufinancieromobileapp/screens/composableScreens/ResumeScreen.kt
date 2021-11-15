@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -97,6 +98,9 @@ fun CarteraRowBox(cartera: Cartera){
                 style = MaterialTheme.typography.body2,
                 color = Color.LightGray
             )
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "+")
+            }
 
         }
 

@@ -69,7 +69,7 @@ fun MainScreen(navController: NavController) {
                 OutlinedButton(
                   
                     onClick = {
-                    navController.navigate(Screen.FacturaScreen.route)
+                    navController.navigate(Screen.ValueTypeScreen.route)
                 }) {
                     Text("Create a new History")
                 }
