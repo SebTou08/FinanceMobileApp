@@ -1,6 +1,8 @@
 package com.example.tufinancieromobileapp
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -14,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.example.tufinancieromobileapp.data.models.Cartera
+import com.example.tufinancieromobileapp.data.models.dtoPage
 import com.example.tufinancieromobileapp.data.remote.interfaces.ApiClient
 import com.example.tufinancieromobileapp.screens.Navigation
 import com.example.tufinancieromobileapp.ui.theme.TuFinancieroMobileAppTheme
@@ -23,7 +26,7 @@ import retrofit2.Response
 
 class MainActivity : ComponentActivity() {
 
-    var carteras by mutableStateOf(listOf<Cartera>())
+    var carteras by mutableStateOf(dtoPage())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +46,16 @@ class MainActivity : ComponentActivity() {
         val carterasInterface = ApiClient.buildCartera()
         val fetchCartera = carterasInterface?.fetchCartera()
 
-        fetchCartera?.enqueue(object : Callback<List<Cartera>> {
-            override fun onResponse(call: Call<List<Cartera>>, response: Response<List<Cartera>>) {
+        fetchCartera?.enqueue(object : Callback<dtoPage> {
+
+
+
+            override fun onResponse(call: Call<dtoPage>, response: Response<dtoPage>) {
                 carteras = response.body()!!
             }
 
-            override fun onFailure(call: Call<List<Cartera>>, t: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<dtoPage>, t: Throwable) {
+                Log.d("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMainActivity", t.toString())
             }
 
         }

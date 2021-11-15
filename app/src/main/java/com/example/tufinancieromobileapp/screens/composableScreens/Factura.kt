@@ -120,7 +120,7 @@ fun FacturaScreen( navController: NavController, _typeOfValue: Int) {
             )
 
 
-            Button(modifier = Modifier
+           /* Button(modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 4.dp),
                 onClick = {
@@ -161,7 +161,7 @@ fun FacturaScreen( navController: NavController, _typeOfValue: Int) {
                     })
                 }) {
 
-            }
+            }*/
         }
 
 

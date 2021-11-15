@@ -15,7 +15,7 @@ import com.example.tufinancieromobileapp.screens.composableScreens.TypeOfValue
 @Composable
 fun Navigation (_carteras: List<Cartera>){
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.ValueTypeScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.ResumeScreen.route) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController)
         }

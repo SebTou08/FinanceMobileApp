@@ -5,7 +5,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    private const val API_BASE_URL = "https://60c2e09f917002001739da47.mockapi.io/"
+    //private const val API_BASE_URL = "https://60c2e09f917002001739da47.mockapi.io/"
+    private const val API_BASE_URL = "https://tufinancierpo.azurewebsites.net/api/"
 
     var carteraInterface: CarteraInterface?=null
 

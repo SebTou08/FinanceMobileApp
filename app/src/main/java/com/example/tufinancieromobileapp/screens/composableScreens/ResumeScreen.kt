@@ -61,23 +61,23 @@ fun CarteraRowBox(cartera: Cartera){
     ) {
         Column() {
             Text(
-                text = "fecha emicion: " + cartera.fechaEmision,
+                text = "fecha emicion: " + cartera.costesFinalesTotales,
                 style = MaterialTheme.typography.body2,
                 color = Color.LightGray
             )
             Spacer(modifier = Modifier.width(20.dp))
             Text(
-                text = "Plazo: "+cartera.plazo,
+                text = "Plazo: "+cartera.esNominal,
                 style = MaterialTheme.typography.body2,
                 color = Color.LightGray
             )
             Text(
-                text = "fecha- descuento: " +cartera.fechaDescuento,
+                text = "fecha- descuento: " +cartera.costesInicialesTotales,
                 style = MaterialTheme.typography.body2,
                 color = Color.LightGray
             )
             Text(
-                text = "fecha- pago: " +cartera.fechaPago,
+                text = "fecha- pago: " +cartera.paymentDate,
                 style = MaterialTheme.typography.body2,
                 color = Color.LightGray
             )
