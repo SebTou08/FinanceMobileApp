@@ -98,7 +98,7 @@ fun DropdownDemo(navController: NavController) {
                     "Nuevo registro con id: $selectedIndex",
                     Toast.LENGTH_LONG
                 ).show()
-                navController.navigate(Screen.FacturaScreen.withArgs(selectedIndex))
+                navController.navigate(Screen.FacturaScreen.withArgs(selectedIndex.toString()))
             },
             modifier = Modifier.align(Alignment.BottomCenter)
         ) {

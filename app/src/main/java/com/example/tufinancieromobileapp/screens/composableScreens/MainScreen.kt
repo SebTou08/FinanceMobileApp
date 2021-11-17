@@ -13,13 +13,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.tufinancieromobileapp.data.models.User
 import com.example.tufinancieromobileapp.screens.Screen
 import com.example.tufinancieromobileapp.ui.theme.TransparentBlack
 import com.skydoves.landscapist.CircularReveal
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
-fun MainScreen(navController: NavController) {
+fun MainScreen(navController: NavController, user:User = User(5,"","","","","") ) {
     Box(
         Modifier
             .background(Color.Black)

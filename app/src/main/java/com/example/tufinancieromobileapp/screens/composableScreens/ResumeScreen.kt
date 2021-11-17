@@ -1,12 +1,12 @@
 package com.example.tufinancieromobileapp.screens.composableScreens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,13 +14,18 @@ import androidx.compose.ui.Modifier
 import com.example.tufinancieromobileapp.data.models.Cartera
 import com.example.tufinancieromobileapp.ui.theme.DeepBlack
 import androidx.compose.ui.*
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.tufinancieromobileapp.R
+import com.example.tufinancieromobileapp.screens.Screen
 import com.example.tufinancieromobileapp.ui.theme.TransparentBlack
 
 @Composable
-fun ResumeScreen(carteras: List<Cartera>) {
+fun ResumeScreen(carteras: List<Cartera>, navController: NavController) {
     Box(
         modifier = Modifier
             .background(DeepBlack)
@@ -29,7 +34,7 @@ fun ResumeScreen(carteras: List<Cartera>) {
 
         //GreetingResume()
         
-        CarteraBox(carteras)
+        CarteraBox(carteras, navController)
 
     }
 
@@ -37,19 +42,19 @@ fun ResumeScreen(carteras: List<Cartera>) {
 
 
 @Composable
-fun CarteraBox(carteras: List<Cartera>){
+fun CarteraBox(carteras: List<Cartera>, navController: NavController){
 
     LazyColumn(){
         items (carteras){
             cartera->
-            CarteraRowBox(cartera)
+            CarteraRowBox(cartera, navController, carteras.indexOf(cartera))
         }
     }
 }
 
 
 @Composable
-fun CarteraRowBox(cartera: Cartera){
+fun CarteraRowBox(cartera: Cartera, navController: NavController, pos: Int){
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -62,18 +67,18 @@ fun CarteraRowBox(cartera: Cartera){
     ) {
         Column() {
             Text(
-                text = "fecha emicion: " + cartera.costesFinalesTotales,
+                text = "fecha emicion: " + cartera.emisionDate,
                 style = MaterialTheme.typography.body2,
                 color = Color.LightGray
             )
             Spacer(modifier = Modifier.width(20.dp))
             Text(
-                text = "Plazo: "+cartera.esNominal,
+                text = "Plazo: "+cartera.plazoTaza,
                 style = MaterialTheme.typography.body2,
                 color = Color.LightGray
             )
             Text(
-                text = "fecha- descuento: " +cartera.costesInicialesTotales,
+                text = "fecha- descuento: " +cartera.discountDate,
                 style = MaterialTheme.typography.body2,
                 color = Color.LightGray
             )
@@ -98,9 +103,21 @@ fun CarteraRowBox(cartera: Cartera){
                 style = MaterialTheme.typography.body2,
                 color = Color.LightGray
             )
-            Button(onClick = { /*TODO*/ }) {
-                Text(text = "+")
-            }
+            Spacer(modifier = Modifier.height(16.dp))
+
+            /*  Button(onClick = { /*TODO*/ }, modifier = Modifier.align(CenterHorizontally).background(
+                  Color.Transparent)) {*/
+                Icon(
+                    painter = painterResource(id = R.drawable.more),
+                    contentDescription = "Google sign button",
+                    tint = Color.Unspecified,
+                    modifier = Modifier
+                        .width(30.dp)
+                        .height(30.dp)
+                        .align(CenterHorizontally)
+                        .clickable { navController.navigate(Screen.ResumeDetailScreen.withArgs(pos.toString())) }
+                )
+          /*  }*/
 
         }
 
