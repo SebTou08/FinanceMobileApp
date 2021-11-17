@@ -12,7 +12,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.tufinancieromobileapp.data.models.Cartera
-import com.example.tufinancieromobileapp.ui.theme.DeepBlack
 import androidx.compose.ui.*
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.draw.clip
@@ -22,13 +21,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tufinancieromobileapp.R
 import com.example.tufinancieromobileapp.screens.Screen
-import com.example.tufinancieromobileapp.ui.theme.TransparentBlack
+import com.example.tufinancieromobileapp.ui.theme.*
 
 @Composable
 fun ResumeScreen(carteras: List<Cartera>, navController: NavController) {
     Box(
         modifier = Modifier
-            .background(DeepBlack)
+            .background(cardNight)
             .fillMaxSize()
     ) {
 
@@ -61,7 +60,7 @@ fun CarteraRowBox(cartera: Cartera, navController: NavController, pos: Int){
         modifier = Modifier
             .padding(start = 15.dp, bottom = 15.dp, top = 15.dp, end = 15.dp)
             .clip(RoundedCornerShape(15.dp))
-            .background(TransparentBlack)
+            .background(Gray)
             .padding(horizontal = 15.dp, vertical = 20.dp)
             .fillMaxWidth()
     ) {
@@ -69,46 +68,46 @@ fun CarteraRowBox(cartera: Cartera, navController: NavController, pos: Int){
             Text(
                 text = "fecha emicion: " + cartera.emisionDate,
                 style = MaterialTheme.typography.body2,
-                color = Color.LightGray
+                color = Color.Black
             )
             Spacer(modifier = Modifier.width(20.dp))
             Text(
                 text = "Plazo: "+cartera.plazoTaza,
                 style = MaterialTheme.typography.body2,
-                color = Color.LightGray
+                color = Color.Black
             )
             Text(
                 text = "fecha- descuento: " +cartera.discountDate,
                 style = MaterialTheme.typography.body2,
-                color = Color.LightGray
+                color = Color.Black
             )
             Text(
                 text = "fecha- pago: " +cartera.paymentDate,
                 style = MaterialTheme.typography.body2,
-                color = Color.LightGray
+                color = Color.Black
             )
 
             Text(
                 text = "Retencion: "+cartera.retencion.toString(),
                 style = MaterialTheme.typography.body2,
-                color = Color.LightGray
+                color = Color.Black
             )
             Text(
                 text = "Tasa efectiva: "+cartera.tasaEfectiva.toString(),
                 style = MaterialTheme.typography.body2,
-                color = Color.LightGray
+                color = Color.Black
             )
             Text(
                 text = "Total facturado:" +cartera.totalFacturado.toString(),
                 style = MaterialTheme.typography.body2,
-                color = Color.LightGray
+                color = Color.Black
             )
             Spacer(modifier = Modifier.height(16.dp))
 
             /*  Button(onClick = { /*TODO*/ }, modifier = Modifier.align(CenterHorizontally).background(
                   Color.Transparent)) {*/
                 Icon(
-                    painter = painterResource(id = R.drawable.more),
+                    painter = painterResource(id = R.drawable.mooore),
                     contentDescription = "Google sign button",
                     tint = Color.Unspecified,
                     modifier = Modifier

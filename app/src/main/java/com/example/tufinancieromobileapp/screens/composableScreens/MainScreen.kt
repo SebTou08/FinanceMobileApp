@@ -15,7 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tufinancieromobileapp.data.models.User
 import com.example.tufinancieromobileapp.screens.Screen
+import com.example.tufinancieromobileapp.ui.theme.DeepBlue
+import com.example.tufinancieromobileapp.ui.theme.Gray
 import com.example.tufinancieromobileapp.ui.theme.TransparentBlack
+import com.example.tufinancieromobileapp.ui.theme.cardNight
 import com.skydoves.landscapist.CircularReveal
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -23,7 +26,7 @@ import com.skydoves.landscapist.glide.GlideImage
 fun MainScreen(navController: NavController, user:User = User(5,"","","","","") ) {
     Box(
         Modifier
-            .background(Color.Black)
+            .background(cardNight)
             .fillMaxSize()
     ) {
 
@@ -43,7 +46,7 @@ fun MainScreen(navController: NavController, user:User = User(5,"","","","","") 
                     .fillMaxWidth()
                     .height(200.dp)
                     .clip(RoundedCornerShape(12.dp))
-                    .background(TransparentBlack)
+                    .background(Gray)
             )
             Column(
                 modifier = Modifier

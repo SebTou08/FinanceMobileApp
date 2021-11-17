@@ -15,7 +15,7 @@ val primaryNight = Color(0xFF509BFF)
 val textNight = Color(0xFFFFFFFF)
 val Rose = Color(0xFFCA396A)
 val InerGreen = Color(0xFFADE46D)
-val Gray = Color(0xFF918A8A)
+val Gray = Color(0xD8C7BEBE)
 val GrayWhite = Color(0xFFD5D0D0)
 val navBar = Color(0xFF0E111F)
 

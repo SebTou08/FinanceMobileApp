@@ -16,6 +16,8 @@ import androidx.navigation.NavController
 import com.example.tufinancieromobileapp.data.models.CarteraApiRequest
 import com.example.tufinancieromobileapp.data.models.Costos
 import com.example.tufinancieromobileapp.data.remote.interfaces.ApiClient
+import com.example.tufinancieromobileapp.screens.Screen
+import com.example.tufinancieromobileapp.ui.theme.DeepBlue
 import com.example.tufinancieromobileapp.ui.theme.Gray
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
@@ -127,6 +129,7 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
         positiveButton("Ok")
         negativeButton("Cancel")
     }) {
+        Text(text = "Ingrese el plazo de la tasa")
         listItemsSingleChoice(
             list = listOf(
                 "Diario",
@@ -252,7 +255,7 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
             negativeButton("Cancel")
         }
     ) {
-
+        Text(text = "Ingrese la fecha de pago")
         datepicker { date ->
             fechaPago = date.toString()
             Toast.makeText(context, fechaEmision, Toast.LENGTH_LONG).show()
@@ -270,7 +273,7 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
             negativeButton("Cancel")
         }
     ) {
-
+        Text(text = "Ingrese la fecha de emision")
         datepicker { date ->
             fechaEmision = date.toString()
             //Toast.makeText(context, fechaEmision, Toast.LENGTH_LONG).show()
@@ -327,12 +330,12 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
 
     Box(
         modifier = Modifier
-            .background(Gray)
+            .background(DeepBlue)
             .fillMaxSize()
     )
     {
 
-        Column(modifier = Modifier.padding(8.dp)) {
+        Column(modifier = Modifier.padding(8.dp).background(Gray)) {
             Text(
                 text = valueType,
                 modifier = Modifier.align(CenterHorizontally)
@@ -394,12 +397,14 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
                                     response.body().toString(),
                                     Toast.LENGTH_LONG
                                 ).show()
-                                Thread.sleep(3_000)
+                                //Thread.sleep(3_000)
+                                navController.navigate(Screen.SplasScreen.route)
                             }
                         }
 
                         override fun onFailure(call: Call<CarteraApiRequest>, t: Throwable) {
-                            Toast.makeText(context, "sssssssssssss$t", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, "No se pudo enviar el request, error: $t", Toast.LENGTH_LONG).show()
+                            navController.navigate(Screen.SplasScreen.route)
                         }
 
                     })
