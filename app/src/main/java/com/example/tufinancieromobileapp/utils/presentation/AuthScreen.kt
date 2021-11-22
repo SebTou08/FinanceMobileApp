@@ -1,6 +1,7 @@
 package com.example.tufinancieromobileapp.utils.presentation
 
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
@@ -15,6 +16,7 @@ import com.example.tufinancieromobileapp.data.models.AuthViewModel
 import com.example.tufinancieromobileapp.screens.Screen
 import com.example.tufinancieromobileapp.screens.composableScreens.MainScreen
 import com.example.tufinancieromobileapp.screens.composableScreens.splashScreen
+import com.example.tufinancieromobileapp.ui.theme.cardNight
 import com.example.tufinancieromobileapp.utils.google.AuthResultContract
 import com.google.android.gms.common.api.ApiException
 import kotlinx.coroutines.launch
@@ -24,7 +26,7 @@ import kotlinx.coroutines.launch
 fun AuthView(errorText:String?,
              onClick:() -> Unit){
     Scaffold {
-        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center,
+        Column(modifier = Modifier.fillMaxSize().background(cardNight), verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
             GoogleSignInButtonUi(text = "Sign Up With Google",
                 loadingText = "Signing In....",

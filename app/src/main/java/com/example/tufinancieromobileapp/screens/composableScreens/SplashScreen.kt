@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -15,6 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.example.tufinancieromobileapp.R
 import com.example.tufinancieromobileapp.screens.Screen
+import com.example.tufinancieromobileapp.ui.theme.DeepBlue
+import com.example.tufinancieromobileapp.ui.theme.cardNight
 import kotlinx.coroutines.delay
 
 @Composable
@@ -40,8 +43,8 @@ fun splashScreen(navController: NavController){
 
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize().background(cardNight)
     ){
-        Image(painter = painterResource(id = R.drawable.fifnnnn), contentDescription ="logo" )
+        Image(painter = painterResource(id = R.drawable.splash), contentDescription ="logo" )
     }
 }

@@ -50,11 +50,11 @@ fun TuFinancieroMobileAppTheme(
     val systemUiController = rememberSystemUiController()
     if(darkTheme){
         systemUiController.setSystemBarsColor(
-            color = Black
+            color = cardNight
         )
     }else{
         systemUiController.setSystemBarsColor(
-            color = Black
+            color = cardNight
         )
     }
 }

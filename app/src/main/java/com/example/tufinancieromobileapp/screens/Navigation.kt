@@ -16,7 +16,7 @@ import com.example.tufinancieromobileapp.utils.presentation.AuthScreen
 @Composable
 fun Navigation(_carteras: List<Cartera>) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.SplasScreen.route) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController)
         }

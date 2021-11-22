@@ -1,24 +1,36 @@
 package com.example.tufinancieromobileapp.screens.composableScreens
 
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tufinancieromobileapp.data.models.CarteraApiRequest
 import com.example.tufinancieromobileapp.data.models.Costos
 import com.example.tufinancieromobileapp.data.remote.interfaces.ApiClient
 import com.example.tufinancieromobileapp.screens.Screen
-import com.example.tufinancieromobileapp.ui.theme.DeepBlue
 import com.example.tufinancieromobileapp.ui.theme.Gray
+import com.example.tufinancieromobileapp.ui.theme.cardNight
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.input
@@ -28,8 +40,24 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 @Composable
 fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(cardNight)
+    ) {
+        Column(verticalArrangement = Arrangement.Center) {
+            FacturaScreenDetail(navController, _typeOfValue)
+
+        }
+    }
+}
+
+
+@Composable
+fun FacturaScreenDetail(navController: NavController, _typeOfValue: Int) {
 
 
     val conttext = LocalContext.current
@@ -53,6 +81,7 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
     var userReceptorId by remember { mutableStateOf(1) }
     var costos by remember { mutableStateOf(listOf<Costos>()) }
     var costo by remember { mutableStateOf(Costos(1, false, "0".toDouble())) }
+    var carteraSending: CarteraApiRequest
 
     val context = LocalContext.current
     var valueType by remember { mutableStateOf("") }
@@ -106,6 +135,21 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
                     periodoCapitaliza = 360
                 }
             }
+            carteraSending = CarteraApiRequest(
+                valueType,
+                esNominal,
+                fechaEmision,
+                fechaPago,
+                totalFacturado.toDouble(),
+                retencion.toDouble(),
+                daysPerYear,
+                plazoTaza,
+                tasa.toFloat(),
+                periodoCapitaliza,
+                receptorId,
+                userReceptorId,
+                costos
+            )
 
         }
     }
@@ -259,7 +303,7 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
         datepicker { date ->
             fechaPago = date.toString()
             Toast.makeText(context, fechaEmision, Toast.LENGTH_LONG).show()
-            dialogStateNominalOEfectiva.show()
+            //dialogStateNominalOEfectiva.show()
         }
     }
 
@@ -296,8 +340,6 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
     }
 
 
-
-
     ////////////////////////
     //Agregar costos inicial o final
 
@@ -329,30 +371,115 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
 
 
     Box(
+        contentAlignment = Alignment.Center,
         modifier = Modifier
-            .background(DeepBlue)
-            .fillMaxSize()
+            .background(Gray)
+            .clip(RoundedCornerShape(25.dp))
+
     )
     {
 
-        Column(modifier = Modifier.padding(8.dp).background(Gray)) {
+        Column(
+            modifier = Modifier
+                .padding(8.dp)
+        ) {
             Text(
                 text = valueType,
                 modifier = Modifier.align(CenterHorizontally)
+            )
+            Text(
+                text = fechaEmision,
+                modifier = Modifier.align(CenterHorizontally)
+            )
+            Text(
+                text = fechaPago,
+                modifier = Modifier.align(CenterHorizontally)
+            )
+            Button(
+                modifier = Modifier.background(Color.Transparent),
+                onClick = { dialogState.show() }) {
+                Text(text = "Agregar fechas ")
+            }
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                value = totalFacturado,
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.ShoppingCart,
+                        contentDescription = null
+                    )
+                },
+                onValueChange = { totalFacturado = it },
+                label = { Text(text = "Ingrese total a facturar") }
+            )
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                value = retencion,
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.ShoppingCart,
+                        contentDescription = null
+                    )
+                },
+                onValueChange = { retencion = it },
+                label = { Text(text = "Ingrese retencion") }
+            )
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                value = daysPerYear.toString(),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Build,
+                        contentDescription = null
+                    )
+                },
+                onValueChange = { daysPerYear = it.toInt() },
+                label = { Text(text = "Ingrese dias por año") }
+            )
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                value = plazoTaza,
+                leadingIcon = { Icon(imageVector = Icons.Default.Add, contentDescription = null) },
+                onValueChange = { plazoTaza = it },
+                label = { Text(text = "Ingrese plazo de tasa") }
+            )
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                value = tasa,
+                leadingIcon = { Icon(imageVector = Icons.Default.Add, contentDescription = null) },
+                onValueChange = { tasa = it },
+                label = { Text(text = "Ingrese tasa") }
             )
 
 
 
 
-            Button(onClick = { dialogState.show() }) {
-                Text(text = "Continuar ")
-            }
+
 
 
             Button(onClick = { dialogStateCostos.show() }) {
                 Text(text = "Añadir costos")
             }
-
 
 
 
@@ -365,21 +492,19 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
 
                     saveDataService?.saveCartera(
                         CarteraApiRequest(
-                            valueType,
-                            esNominal,
-                            fechaEmision,
-                            fechaPago,
+                            "Nominal",
+                            true,
+                            "" + fechaEmision,
+                            "" + fechaPago,
                             totalFacturado.toDouble(),
                             retencion.toDouble(),
-                            daysPerYear,
+                            "365".toInt(),
                             plazoTaza,
                             tasa.toFloat(),
                             periodoCapitaliza,
-                            receptorId,
-                            userReceptorId,
+                            1,
+                            1,
                             costos
-
-
                         )
                     )?.enqueue(object : Callback<CarteraApiRequest> {
                         override fun onResponse(
@@ -387,6 +512,7 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
                             response: Response<CarteraApiRequest>
                         ) {
                             if (response.isSuccessful) {
+                                Log.d("tttttttttttttttttttttttttttttttttttt", response.toString())
                                 Toast.makeText(
                                     context,
                                     "555555555555555555555",
@@ -403,20 +529,28 @@ fun FacturaScreen(navController: NavController, _typeOfValue: Int) {
                         }
 
                         override fun onFailure(call: Call<CarteraApiRequest>, t: Throwable) {
-                            Toast.makeText(context, "No se pudo enviar el request, error: $t", Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                context,
+                                "No se pudo enviar el request, error: $t",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            Log.d("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMainActivity", t.toString())
                             navController.navigate(Screen.SplasScreen.route)
                         }
 
                     })
 
                 }) {
-                    Text(text = "Registrar")
+                Text(text = "Registrar")
             }
         }
 
 
     }
 }
+
+
+
 
 
 

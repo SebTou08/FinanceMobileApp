@@ -17,6 +17,8 @@ import androidx.navigation.NavController
 import com.example.tufinancieromobileapp.screens.Screen
 import com.example.tufinancieromobileapp.ui.theme.DeepBlack
 import com.example.tufinancieromobileapp.ui.theme.DeepBlue
+import com.example.tufinancieromobileapp.ui.theme.Gray
+import com.example.tufinancieromobileapp.ui.theme.cardNight
 import kotlinx.coroutines.launch
 
 @Composable
@@ -25,7 +27,7 @@ fun TypeOfValue(navController: NavController) {
     //1 es recibo
     Box(
         modifier = Modifier
-            .background(DeepBlack)
+            .background(cardNight)
             .fillMaxSize()
     ) {
         Box(modifier = Modifier.align(Alignment.Center)) {
@@ -38,7 +40,7 @@ fun TypeOfValue(navController: NavController) {
 @Composable
 fun DropdownDemo(navController: NavController) {
     var expanded by remember { mutableStateOf(false) }
-    val items = listOf("FACTURA", "LETRA", "RECIBO", "D", "E", "F")
+    val items = listOf("FACTURA", "LETRA", "RECIBO")
     val disabledValue = "B"
     var selectedIndex by remember { mutableStateOf(0) }
     val context = LocalContext.current
@@ -64,7 +66,7 @@ fun DropdownDemo(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    DeepBlue
+                    Gray
                 )
                 .padding(50.dp)
         ) {
@@ -102,7 +104,7 @@ fun DropdownDemo(navController: NavController) {
             },
             modifier = Modifier.align(Alignment.BottomCenter)
         ) {
-            Text(text = "pepe")
+            Text(text = "Continuar")
         }
     }
 }
